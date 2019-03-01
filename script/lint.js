@@ -51,6 +51,10 @@ function gnCheckConfig (config, env) {
   if (result.status === 0) {
     const args = ['check', outDir, '//electron:electron_lib']
     result = childProcess.spawnSync('gn', args, { env, stdio: 'inherit' })
+    if (result.status === 0) {
+      const args = ['check', outDir, '//electron:electron_app']
+      result = childProcess.spawnSync('gn', args, { env, stdio: 'inherit' })
+    }
     if (result.status) {
       console.log(`Error running 'gn ${args.join(' ')}'`)
     }
